@@ -42,3 +42,13 @@ const create_pokemon_box = (pokemon) =>{
 
     return pokemon_box
 }
+
+const click_handler = async () => {
+    let amount = Number(search_bar__input.value)
+    let pokemons = await get_pokemon_by_amount(amount)
+    let pokemon_boxs = pokemons.map(pokemon => create_pokemon_box(pokemon))
+
+    let fragment = document.createDocumentFragment()
+    pokemon_boxs.forEach(pokemon_box => fragment.appendChild(pokemon_box))
+    gallery__ul.appendChild(fragment)
+}
