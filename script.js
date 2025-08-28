@@ -52,3 +52,12 @@ const click_handler = async () => {
     pokemon_boxs.forEach(pokemon_box => fragment.appendChild(pokemon_box))
     gallery__ul.appendChild(fragment)
 }
+
+const search_bar__input = document.querySelector('.search-bar__input') 
+const search_bar__btn = document.querySelector('.search-bar__btn')
+const gallery__ul = document.querySelector('.gallery__ul')
+console.log(search_bar__btn)
+
+search_bar__btn.addEventListener('click', () => {
+    click_handler()}
+)         
