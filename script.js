@@ -53,14 +53,17 @@ const load_boxes_by_amount = async (amount) => {
 }
 
 const click_handler = () => {
-    let amount = Number(search_bar__input.value)
-    load_boxes_by_amount(amount)
+    //todo una funcion que busque por nombres los pokemones
 }
 
 const search_bar__input = document.querySelector('.search-bar__input') 
 const search_bar__btn = document.querySelector('.search-bar__btn')
 const gallery__ul = document.querySelector('.gallery__ul')
 
+let showed_pokemons = 20
+
 search_bar__btn.addEventListener('click', () => {
     click_handler()}
-)         
+)     
+
+load_boxes_by_amount(showed_pokemons)
