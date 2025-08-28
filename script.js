@@ -8,10 +8,11 @@ const get_pokemon_data = async (id) => {
     }
 }
 
-const get_pokemon_by_amount = async (amount) => {
+const get_pokemon_by_amount = async (amount, already_showed) => {
+    // console.log(`get pokemon by amount with amount = ${amount} and already_showed = ${already_showed}`)
     try{
         let pokemons = []
-        for (let i = 1; i <= amount; i++){
+        for (let i = already_showed + 1; i <= amount + already_showed; i++){
             let pokemon = await get_pokemon_data(i)
             pokemons.push(pokemon)
         }
@@ -43,10 +44,11 @@ const create_pokemon_box = (pokemon) =>{
     return pokemon_box
 }
 
-const load_boxes_by_amount = async (amount) => {
-    let pokemons = await get_pokemon_by_amount(amount)
+const load_boxes_by_amount = async (amount, already_showed = 0) => {
+    // console.log(`load boxes by amount amount = ${amount} already_showed = ${already_showed}`)
+    let pokemons = await get_pokemon_by_amount(amount, already_showed)
     let pokemon_boxs = pokemons.map(pokemon => create_pokemon_box(pokemon))
-
+    console.log(pokemon_boxs)
     let fragment = document.createDocumentFragment()
     pokemon_boxs.forEach(pokemon_box => fragment.appendChild(pokemon_box))
     gallery__ul.appendChild(fragment)
@@ -59,11 +61,17 @@ const click_handler = () => {
 const search_bar__input = document.querySelector('.search-bar__input') 
 const search_bar__btn = document.querySelector('.search-bar__btn')
 const gallery__ul = document.querySelector('.gallery__ul')
+const show_more_btn = document.querySelector('.show_more_btn')
 
 let showed_pokemons = 20
 
 search_bar__btn.addEventListener('click', () => {
-    click_handler()}
-)     
+    click_handler()
+})     
 
 load_boxes_by_amount(showed_pokemons)
+
+show_more_btn.addEventListener('click', () => {
+    load_boxes_by_amount(10, showed_pokemons)
+    showed_pokemons += 10
+})
