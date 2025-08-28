@@ -20,3 +20,25 @@ const get_pokemon_by_amount = async (amount) => {
         console.log(err)
     }
 }
+
+const create_pokemon_box = (pokemon) =>{
+    let img = document.createElement('img')
+    img.classList.add('pokemon-box__image')
+    img.src = pokemon.sprites.front_default
+
+    let name = document.createElement('h3')
+    name.classList.add('pokemon-box__name')
+    name.textContent = pokemon.name
+    
+    let pokedex_id = document.createElement('span')
+    pokedex_id.classList.add('pokemon-box__pokedex-id')
+    pokedex_id.textContent = pokemon.id
+
+    let pokemon_box = document.createElement('li')
+    pokemon_box.classList.add('gallery__pokemon-box')
+    pokemon_box.appendChild(img)
+    pokemon_box.appendChild(name)
+    pokemon_box.appendChild(pokedex_id)
+
+    return pokemon_box
+}
