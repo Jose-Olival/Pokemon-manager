@@ -43,8 +43,7 @@ const create_pokemon_box = (pokemon) =>{
     return pokemon_box
 }
 
-const click_handler = async () => {
-    let amount = Number(search_bar__input.value)
+const load_boxes_by_amount = async (amount) => {
     let pokemons = await get_pokemon_by_amount(amount)
     let pokemon_boxs = pokemons.map(pokemon => create_pokemon_box(pokemon))
 
@@ -53,10 +52,14 @@ const click_handler = async () => {
     gallery__ul.appendChild(fragment)
 }
 
+const click_handler = () => {
+    let amount = Number(search_bar__input.value)
+    load_boxes_by_amount(amount)
+}
+
 const search_bar__input = document.querySelector('.search-bar__input') 
 const search_bar__btn = document.querySelector('.search-bar__btn')
 const gallery__ul = document.querySelector('.gallery__ul')
-console.log(search_bar__btn)
 
 search_bar__btn.addEventListener('click', () => {
     click_handler()}
